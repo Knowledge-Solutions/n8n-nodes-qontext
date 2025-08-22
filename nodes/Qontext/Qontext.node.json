@@ -1,17 +1,17 @@
 {
-	"node": "n8n-nodes-base.httpbin",
+	"node": "n8n-nodes-qontext",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Development", "Developer Tools"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "http://httpbin.org/#/Auth/get_bearer"
+				"url": "https://docs.qontext.ai/get_started"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "http://httpbin.org/"
+				"url": "https://docs.qontext.ai/get_started"
 			}
 		]
 	}

@@ -1,48 +1,67 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+![image](banner.png)
 
-# n8n-nodes-starter
+# n8n-nodes-qontext
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+This is an n8n community node. It lets you use Qontext in your n8n workflows.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+[Qontext](https://www.qontext.ai/) is an LLM memory solution which gathers your company data and makes it AI-ready.
 
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
-## Prerequisites
+[Installation](#installation)  
+[Operations](#operations)  
+[Credentials](#credentials)  <!-- delete if no auth needed -->  
+[Compatibility](#compatibility)  
+[Usage](#usage)  <!-- delete if not using this section -->  
+[Resources](#resources)  
+[Version history](#version-history)  <!-- delete if not using this section -->  
 
-You need the following installed on your development machine:
+## Installation
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-## Using this starter
+## Operations
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+### Ingestion
+- **Ingest Unstructured Text**: This operation allows you to send plain text or markdown to be ingested into a specified Qontext Knowledge Graph.
+- **Ingest Website Data**: This operation crawls a website from a given URL and ingests the data into a Knowledge Graph.
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+### Retrieval
+- **Get Context**: This operation retrieves relevant context from a Knowledge Graph based on a natural language prompt.
 
-## More information
+## Credentials
+To use the Qontext API, you'll need an API key. This key is required for all requests and is included as an `X-API-Key` header. You can get your API key by signing up for an account on the Qontext website.
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+This authentication method ensures that your requests are secure and correctly associated with your workspace.
 
-## License
+## Compatibility
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+
+## Usage
+This node is designed to simplify interactions with the Qontext API by handling the ingestion and retrieval of data. While the core functionality is straightforward, there are a few things to keep in mind to ensure a smooth workflow.
+
+**Using `workspaceId` and `knowledgeGraphId`**
+
+Both the ingestion and retrieval operations require a workspaceId and a knowledgeGraphId. These IDs are fundamental to directing your data to the correct location within Qontext. You must obtain these IDs from your Qontext account dashboard before using the node. Make sure to use the correct IDs for the specific workspace and knowledge graph you want to interact with.
+
+**Choosing the Right Retrieval Operation**:
+
+The retrieval section offers two operations: **Get Context** and **Get Answer**.
+
+**Get Context**: Use this operation when you want to retrieve the raw, relevant data from your knowledge graph. The response will provide the data that informed the answer. This is useful for building custom applications or performing further analysis on the retrieved information.
+
+**Get Answer**: Use this operation when you simply want a direct, summarized answer to your prompt. The response will be a concise summary based on the retrieved context. This is ideal for generating quick, human-readable outputs or feeding answers directly into other systems.
+
+For most use cases, **Get Answer** will be the most straightforward. However, if you need the underlying data for more complex workflows, **Get Context** is the better choice.
+
+### Resources
+For more detailed information and advanced use cases, refer to the official documentation.
+
+* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes): Learn more about community-created nodes and how they work within n8n.
+* [Qontext API Documentation](https://docs.qontext.ai/): This is the official API documentation for the Qontext service. It provides comprehensive details on all available endpoints, parameters, and response formats.
+
+### Version History
+This is the initial version of the Qontext node, supporting core ingestion and retrieval operations. It's designed for seamless integration with the Qontext API. Future versions may introduce additional features and endpoints as they become available. We recommend keeping your n8n instance up-to-date to access the latest features and improvements.
+
+

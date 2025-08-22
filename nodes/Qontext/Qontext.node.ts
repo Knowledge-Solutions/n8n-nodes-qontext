@@ -1,33 +1,35 @@
 import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
-import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
+import { IngestionFields, IngestionOperations } from './IngestionDescription';
+import { RetrievalFields, RetrievalOperations } from './RetrievalDescription';
 
-export class HttpBin implements INodeType {
+export class Qontext implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'HttpBin',
-		name: 'httpBin',
-		icon: { light: 'file:httpbin.svg', dark: 'file:httpbin.svg' },
+		displayName: 'Qontext',
+		name: 'qontext',
+		icon: 'file:favicon.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Interact with HttpBin API',
+		description: 'Use the Qontext API',
 		defaults: {
-			name: 'HttpBin',
+			name: 'Qontext',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		usableAsTool: true,
 		credentials: [
 			{
-				name: 'httpbinApi',
-				required: false,
+				name: 'qontextApi',
+				required: true,
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://httpbin.org',
+			baseURL: 'https://api.staging.qontext.ai/v1',
 			url: '',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				'X-API-Key': '={{$credentials?.token}}'
 			},
 		},
 		/**
@@ -49,15 +51,21 @@ export class HttpBin implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'HTTP Verb',
-						value: 'httpVerb',
+						name: 'Ingestion',
+						value: 'ingestion',
+					},
+					{
+						name: 'Retrieval',
+						value: 'retrieval',
 					},
 				],
-				default: 'httpVerb',
+				default: 'ingestion',
 			},
 
-			...httpVerbOperations,
-			...httpVerbFields,
+			...IngestionOperations,
+			...IngestionFields,
+			...RetrievalOperations,
+			...RetrievalFields
 		],
 	};
 }

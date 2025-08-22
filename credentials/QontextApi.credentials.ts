@@ -5,10 +5,10 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class HttpBinApi implements ICredentialType {
-	name = 'httpbinApi';
-	displayName = 'HttpBin API';
-	documentationUrl = 'https://your-docs-url';
+export class QontextApi implements ICredentialType {
+	name = 'qontextApi';
+	displayName = 'Qontext API';
+	documentationUrl = 'https://docs.qontext.ai/get_started';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'Token',
@@ -23,7 +23,7 @@ export class HttpBinApi implements ICredentialType {
 			displayName: 'Domain',
 			name: 'domain',
 			type: 'string',
-			default: 'https://httpbin.org',
+			default: 'https://api.staging.qontext.ai',
 		},
 	];
 
@@ -35,7 +35,7 @@ export class HttpBinApi implements ICredentialType {
 		type: 'generic',
 		properties: {
 			headers: {
-				Authorization: '={{"Bearer " + $credentials.token}}',
+				'X-API-Key': '={{$credentials.token}}',
 			},
 		},
 	};
@@ -43,8 +43,14 @@ export class HttpBinApi implements ICredentialType {
 	// The block below tells how this credential can be tested
 	test: ICredentialTestRequest = {
 		request: {
+			method: 'POST', // Required for validate-key
 			baseURL: '={{$credentials?.domain}}',
-			url: '/bearer',
+			url: '/auth/validate-key',
+			headers: {
+				'X-API-Key': '={{$credentials?.token}}',
+				'accept': '*/*',
+			},
+			body: {}, // Empty object to send POST with empty payload
 		},
-	};
+	};	
 }
