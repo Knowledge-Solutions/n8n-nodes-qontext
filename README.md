@@ -1,4 +1,4 @@
-![image](banner.png)
+![image](https://raw.githubusercontent.com/Knowledge-Solutions/n8n-nodes-qontext/refs/heads/main/banner.png)
 
 # n8n-nodes-qontext
 
@@ -36,7 +36,7 @@ This authentication method ensures that your requests are secure and correctly a
 
 ## Compatibility
 
-_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+This node is available for n8n versions >=2.220.0
 
 ## Usage
 This node is designed to simplify interactions with the Qontext API by handling the ingestion and retrieval of data. While the core functionality is straightforward, there are a few things to keep in mind to ensure a smooth workflow.
