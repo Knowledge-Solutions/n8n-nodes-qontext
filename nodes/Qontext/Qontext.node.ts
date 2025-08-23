@@ -16,7 +16,6 @@ export class Qontext implements INodeType {
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
-		usableAsTool: true,
 		credentials: [
 			{
 				name: 'qontextApi',
