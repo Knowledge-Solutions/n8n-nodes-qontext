@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-qontext",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Qontext gathers your company data and makes it AI-ready",
   "keywords": [
     "n8n-community-node-package"
