@@ -23,7 +23,7 @@ export class QontextApi implements ICredentialType {
 			displayName: 'Domain',
 			name: 'domain',
 			type: 'string',
-			default: 'https://api.staging.qontext.ai',
+			default: 'https://api.qontext.ai',
 		},
 	];
 
